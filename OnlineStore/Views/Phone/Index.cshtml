@@ -1,0 +1,28 @@
+﻿@model PhoneViewModel
+@*
+    <a href="~/Phone/Create">Create</a>
+*@
+
+<h1 text-align:center>Phones</h1>
+
+<table border="1">
+    <tr>
+        <th>Phone</th>
+        <th>RAM</th>
+        <th>Memory</th>
+        <th>Company</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+    <tr>
+        @foreach (var phone in Model.phones)
+        {
+            <td>@phone.Name</td>
+            <td>@phone.CompanyName</td>
+            <td>@phone.RAM</td>
+            <td>@phone.Memory</td>
+            <td>@phone.Price</td>
+            <td><a href="~/Phone/Details/@phone.Id">Details</a></td>
+        }
+    </tr>
+</table>
