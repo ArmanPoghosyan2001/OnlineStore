@@ -50,7 +50,7 @@ namespace OnlineStore
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Phone}/{action=Index}/{id?}");
+                    pattern: "{controller=Admin}/{action=Login}/{id?}");
             });
         }
     }

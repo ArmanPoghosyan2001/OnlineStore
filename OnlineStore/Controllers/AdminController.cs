@@ -40,11 +40,17 @@ namespace OnlineStore.Controllers
                 {
                     await Authenticate(model.Email); // аутентификация
 
-                    return RedirectToAction("Index","Admin");
+                    return RedirectToAction("Index", "Admin");
                 }
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }
             return View(model);
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Phone");
         }
         private async Task Authenticate(string userName)
         {
@@ -59,6 +65,7 @@ namespace OnlineStore.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Index()
         {
@@ -81,6 +88,7 @@ namespace OnlineStore.Controllers
             return RedirectToAction("Create");
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -89,12 +97,13 @@ namespace OnlineStore.Controllers
         }
 
         [HttpPost]
-        public IActionResult  Edit(Phone phone)
+        public IActionResult Edit(Phone phone)
         {
             phoneBl.Update(phone);
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Delete(int id)
         {

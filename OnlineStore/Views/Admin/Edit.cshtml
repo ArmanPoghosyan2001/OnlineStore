@@ -1,38 +1,41 @@
-﻿@using Models 
+﻿@using Models
 @model Phone
 
-    <form method="post">
-        <table>
-            <tr>
+@{
+    Layout = "_LayoutForAdmin";
+}
+<form method="post">
+    <table>
+        <tr>
 
-                <td><label for="name">Name:</label></td>
-                <td><input type="text" name="Name" id="name" placeholder="Phone" value="@Model.Name" /> </td>
-            </tr>
-            <tr>
-                <td><label for="compName">CompanyName:</label></td>
-                <td><input type="text" name="CompanyName" id="compName" placeholder="Company" value="@Model.CompanyName" /></td>
-            </tr>
-            <tr>
-                <td><label for="ram">RAM:</label></td>
-                <td> <input type="text" name="RAM" id="ram" placeholder="RAM size" value="@Model.RAM"/> </td>
-            </tr>
-            <tr>
-                <td><label for="memory">Memory:</label></td>
-                <td> <input type="text" name="Memory" id="memory" placeholder="Memory size" value="@Model.Memory"/></td>
-            </tr>
-            <tr>
-                <td><label for="price">Price:</label></td>
-                <td> <input type="text" name="Price" id="price" placeholder="Price" value="@Model.Price"/></td>
-            </tr>
+            <td><label for="name">Name:</label></td>
+            <td><input type="text" name="Name" id="name" placeholder="Phone" value="@Model.Name" /> </td>
+        </tr>
+        <tr>
+            <td><label for="compName">CompanyName:</label></td>
+            <td><input type="text" name="CompanyName" id="compName" placeholder="Company" value="@Model.CompanyName" /></td>
+        </tr>
+        <tr>
+            <td><label for="ram">RAM:</label></td>
+            <td> <input type="text" name="RAM" id="ram" placeholder="RAM size" value="@Model.RAM" /> </td>
+        </tr>
+        <tr>
+            <td><label for="memory">Memory:</label></td>
+            <td> <input type="text" name="Memory" id="memory" placeholder="Memory size" value="@Model.Memory" /></td>
+        </tr>
+        <tr>
+            <td><label for="price">Price:</label></td>
+            <td> <input type="text" name="Price" id="price" placeholder="Price" value="@Model.Price" /></td>
+        </tr>
 
-            <tr>
-                <td>
-                </td>
-                <td>
-                    <input type="reset" value="Clear" />
-                    <input type="submit" value="Edit" />
-                </td>
-                <td></td>
-            </tr>
-        </table>
-    </form>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type="reset" value="Clear" />
+                <input type="submit" value="Edit" />
+            </td>
+            <td></td>
+        </tr>
+    </table>
+</form>
