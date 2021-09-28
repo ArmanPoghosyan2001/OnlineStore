@@ -29,5 +29,17 @@ namespace BL
             context.Phones.Add(phone);
             context.SaveChanges();
         }
+
+        public void Update(Phone phone)
+        {
+            context.Phones.Update(phone);
+            context.SaveChanges();
+        }
+
+        public void Delete(int id)
+        {
+            context.Remove(GetDetails(id));
+            context.SaveChanges();
+        }
     }
 }

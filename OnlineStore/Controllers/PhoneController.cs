@@ -25,17 +25,6 @@ namespace OnlineStore.Controllers
             return View(phonesVM);
         }
         [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Create(Phone phone)
-        {
-            phoneBl.Create(phone);
-            return RedirectToAction("Create");
-        }
-        [HttpGet]
         public IActionResult Details(int id)
         {
             Phone phone = phoneBl.GetDetails(id);

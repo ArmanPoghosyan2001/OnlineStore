@@ -1,11 +1,8 @@
 ﻿@model PhoneViewModel
-@*
-    <a href="~/Phone/Create">Create</a>
-*@
 
 <h1 text-align:center>Phones</h1>
 
-<table>
+<table border="1">
     <tr>
         <th>Phone</th>
         <th>Company</th>
@@ -23,6 +20,8 @@
             <td>@phone.Memory</td>
             <td>@phone.Price</td>
             <td><a href="~/phone/details/@phone.Id">Details</a></td>
+            <td><a href="~/admin/edit/@phone.Id">Edit</a></td>
+            <td><a href="~/admin/delete/@phone.Id">Delete</a></td>
         </tr>
     }
 

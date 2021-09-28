@@ -55,7 +55,7 @@ namespace OnlineStore
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Phone}/{action=Create}/{id?}");
+                    pattern: "{controller=Phone}/{action=Index}/{id?}");
             });
         }
     }
