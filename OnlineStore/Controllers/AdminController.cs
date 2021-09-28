@@ -1,10 +1,15 @@
 ﻿using BL;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using OnlineStore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace OnlineStore.Controllers
@@ -17,6 +22,43 @@ namespace OnlineStore.Controllers
         {
             phoneBl = new PhoneBL(context);
         }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Admin admin = await phoneBl.context.Admins.FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
+                if (admin != null)
+                {
+                    await Authenticate(model.Email); // аутентификация
+
+                    return RedirectToAction("Index","Admin");
+                }
+                ModelState.AddModelError("", "Некорректные логин и(или) пароль");
+            }
+            return View(model);
+        }
+        private async Task Authenticate(string userName)
+        {
+            // создаем один claim
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+            };
+            // создаем объект ClaimsIdentity
+            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+            // установка аутентификационных куки
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+        }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -25,6 +67,7 @@ namespace OnlineStore.Controllers
             return View(phonesVM);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Create()
         {

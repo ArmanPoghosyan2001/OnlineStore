@@ -8,7 +8,7 @@ namespace BL
 {
     public class PhoneBL
     {
-        MobileContext context;
+        public MobileContext context;
         public PhoneBL(MobileContext _context)
         {
             this.context = _context;
